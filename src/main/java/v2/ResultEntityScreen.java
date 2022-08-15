@@ -48,7 +48,7 @@ public class ResultEntityScreen extends JFrame{
         }
         String privateColLongPrint0 = "private Long id;\n";
         for(int i=1; i< colLong.length; i++){
-            privateColLongPrint = "private Long "+colLong[i]+";\n" + privateColLongPrint;
+            privateColLongPrint = "     private Long "+colLong[i]+";\n" + privateColLongPrint;
         }
         colLongPrintCommaUpdate = colLongPrintComma;
         colLongPrintComma = "Long "+colLong[0] +", "+ colLongPrintComma;
@@ -59,7 +59,7 @@ public class ResultEntityScreen extends JFrame{
         String colStringPrintComma=""; // String var1, String var2, String var3, ...의 형태.
         String colStringPrintThis="";
         for(int i=0; i< colStr.length; i++) {
-            privateColStrPrint = "private String "+colStr[i]+";\n" + privateColStrPrint;
+            privateColStrPrint = "      private String "+colStr[i]+";\n" + privateColStrPrint;
             colStringPrintComma = "String " + colStr[i] + ", \n" + colStringPrintComma;
             colStringPrintThis = "this."+colStr[i]+" = "+colStr[i]+";\n" + colStringPrintThis;
         }
@@ -69,7 +69,7 @@ public class ResultEntityScreen extends JFrame{
         String colDatePrintComma=""; // LocalDateTime var1, LocalDateTime var2, LocalDateTime var3, ...의 형태.
         String colDatePrintThis="";
         for(int i=0; i< colDate.length; i++) {
-            privateColDatePrint = "private LocalDateTime "+colDate[i]+";\n" + privateColDatePrint;
+            privateColDatePrint = "     private LocalDateTime "+colDate[i]+";\n" + privateColDatePrint;
             colDatePrintComma = "LocalDateTime " + colDate[i] + ", \n" + colDatePrintComma;
             colDatePrintThis = "this."+colDate[i]+" = "+colDate[i]+";\n" + colDatePrintThis;
         }
@@ -108,10 +108,10 @@ public class ResultEntityScreen extends JFrame{
                  "    @Id\n" +
                  "    @GeneratedValue(strategy = GenerationType.IDENTITY)\n" +
                  "    @Column(name = \""+usc.getTnSmall()+"_id\")\n" +
-                 "     " +privateColLongPrint0+
-                 "      "+privateColLongPrint+"\n"+
-                 "     "+privateColStrPrint +"\n"+
-                 "     "+privateColDatePrint+"\n" +
+                 "     "+privateColLongPrint0+
+                 ""+privateColLongPrint+"\n"+
+                 ""+privateColStrPrint +"\n"+
+                 ""+privateColDatePrint+"\n" +
                  "    @ManyToOne(fetch = FetchType.LAZY)\n" +
                  "    @JoinColumn(name = \""+usc.getManyToOneJoinColumn() +"\", updatable = false)\n" +
                  "    private "+usc.getToOneTableNameClass()+" "+usc.getToOneTableNameMethod()+";\n" +

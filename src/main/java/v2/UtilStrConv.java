@@ -179,25 +179,25 @@ public class   UtilStrConv {
          colDate = firstUpperCase(colDate);
 
          String setStrString []= new String[colStr.length];
-         String setStrPrint = null;
+         String setStrPrint = "";
          for(int i=0; i< colStr.length; i++){
-         setStrString[i] = tablename+".set"+colStr[i]+"(form.get"+colStr[i]+"());\n";
+         setStrString[i] = "        "+tablename+".set"+colStr[i]+"(form.get"+colStr[i]+"());\n";
          setStrPrint = setStrString[i]+setStrPrint;
          System.out.println( setStrString[i]);
          }
 
          String setLongString [] =new String[colLong.length];
-         String setLongPrint = null;
+         String setLongPrint = "";
          for(int i=1; i< colLong.length; i++){
-         setLongString[i] = tablename+".set"+colLong[i]+"(form.get"+colLong[i]+"());\n";
+         setLongString[i] = "       "+tablename+".set"+colLong[i]+"(form.get"+colLong[i]+"());\n";
          setLongPrint = setLongString[i] + setLongPrint;
          System.out.println(setLongString[i]);
          }
 
         String setDateString [] =new String[colDate.length];
-         String setDatePrint = null;
+         String setDatePrint = "";
         for(int i=0; i< colDate.length; i++){
-            setDateString[i] = tablename+".set"+colDate[i]+"(form.get"+colDate[i]+"());\n";
+            setDateString[i] = "        "+tablename+".set"+colDate[i]+"(form.get"+colDate[i]+"());\n";
             setDatePrint = setDateString[i] + setDatePrint;
             System.out.println(setDateString[i]);
 
@@ -217,5 +217,128 @@ public class   UtilStrConv {
             str[i]=str[i].substring(0, 1).toUpperCase() + str[i].substring(1);
         }
         return str;
+    }
+
+    //앞글자 소문자로 바꾸기. getCreateTable(), getTitle... 사용.
+    public static String[] firstLowerCase(String[] str){
+        for(int i=0; i< str.length; i++) {
+            str[i]=str[i].substring(0, 1).toLowerCase() + str[i].substring(1);
+        }
+        return str;
+    }
+
+
+    public static String getVariablesPrint(String[] colStr, String[] colLong, String[] colDate){
+        String stringPrint = "";
+
+        colStr = firstLowerCase(colStr);
+        colLong = firstLowerCase(colLong);
+        colDate = firstLowerCase(colDate);
+
+        String colLongs = "";
+        for(int i =0; i< colLong.length; i++){
+            colLongs = colLongs +"    private Long "+colLong[i]+";\n" ;
+        }
+        colLongs = colLongs + "\n";
+
+        String colStrs = "";
+        for(int i =0; i< colStr.length; i++){
+            colStrs = colStrs + "    private String "+colStr[i]+";\n";
+        }
+        colStrs = colStrs + "\n";
+
+        String colDates = "";
+        for(int i =0; i< colDate.length; i++){
+            colDates = colDates +"    private LocalDateTime "+colDate[i]+";\n";
+        }
+        colDates = colDates + "\n";
+        colDates = colDates.substring(0,colDates.length()-1);
+        return colLongs + colStrs + colDates;
+    }
+
+    public static String getConstPrint(String[] colStr, String[] colLong, String[] colDate){
+        String stringPrint = "";
+
+        colStr = firstLowerCase(colStr);
+        colLong = firstLowerCase(colLong);
+        colDate = firstLowerCase(colDate);
+
+        String colLongs = "";
+        for(int i =0; i< colLong.length; i++){
+            colLongs = colLongs +", Long "+colLong[i];
+        }
+        colLongs = colLongs + "\n";
+        colLongs = colLongs.substring(1);
+
+        String colStrs = "";
+        for(int i =0; i< colStr.length; i++){
+            colStrs = colStrs +", String "+colStr[i];
+        }
+        colStrs = colStrs + "\n";
+
+        String colDates = "";
+        for(int i =0; i< colDate.length; i++){
+            colDates = colDates +", LocalDateTime "+colDate[i];
+        }
+        colDates = colDates + "\n";
+
+
+
+        return colLongs + colStrs + colDates;
+
+
+    }
+
+    public static String getConstInPrint(String[] colStr, String[] colLong, String[] colDate) {
+
+        colStr = firstLowerCase(colStr);
+        colLong = firstLowerCase(colLong);
+        colDate = firstLowerCase(colDate);
+
+        String colLongs = "";
+        for(int i =0; i< colLong.length; i++){
+            colLongs = colLongs + "     this."+colLong[i]+" = "+colLong[i]+";\n";
+        }
+        colLongs = colLongs + "\n";
+
+        String colStrs = "";
+        for(int i =0; i< colStr.length; i++){
+            colStrs = colStrs + "     this."+colStr[i]+" = "+colStr[i]+";\n";
+        }
+        colStrs = colStrs + "\n";
+
+        String colDates = "";
+        for(int i =0; i< colDate.length; i++){
+            colDates = colDates + "     this."+colDate[i]+" = "+colDate[i]+";\n";
+        }
+        colDates = colDates + "\n";
+
+        return colLongs + colStrs + colDates;
+    }
+
+    public String getNewsqlPrint(String[] colLong, String[] colStr, String[] colDate, String className, String classNameSm) {
+
+        colStr = firstLowerCase(colStr);
+        colLong = firstLowerCase(colLong);
+        colDate = firstLowerCase(colDate);
+
+        String esm = classNameSm;
+
+        String colLongs ="";
+        for(int i=0; i<colLong.length; i++){
+            colLongs = colLongs +"                      "+esm+"."+colLong[i]+",\n";
+        }
+
+        String colStrs="";
+        for(int i=0; i<colStr.length; i++){
+            colStrs = colStrs +"                      "+esm+"."+colStr[i]+",\n";
+        }
+
+        String colDates="";
+        for(int i=0; i<colDate.length; i++){
+            colDates = colDates +"                      "+esm+"."+colDate[i]+",\n";
+        }
+
+        return colLongs + colStrs + colDates;
     }
 }

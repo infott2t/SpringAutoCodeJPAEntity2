@@ -91,7 +91,11 @@ public class Sys02 extends JFrame{
                // new ResultFormScreen(usc);
                 new ResultUpdateFormScreen(usc);
                 new RepositoryResultScreen(usc);
-
+                new DtoResultScreen(usc);
+                new SearchConditionResultScreen(usc);
+                new RepositoryImplResultScreen(usc);
+                new ApiDtoResultScreen(usc);
+                new RestControllerResultScreen(usc);
             }
         });
     }

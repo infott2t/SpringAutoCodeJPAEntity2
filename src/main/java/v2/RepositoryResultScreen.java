@@ -73,7 +73,9 @@ public class RepositoryResultScreen extends JFrame{
                 "\n" +
                 "public interface "+className+"RepositoryCustom {\n" +
                 "\n" +
-                "    Page<"+className+"> searchAllV2("+className+"Condition condition, Pageable pageable);\n" +
+                "    Page<"+className+"Dto> searchAllV2("+className+"SearchCondition condition, Pageable pageable);\n"+
+                "\n" +
+                "  "+"List<"+className+"ApiDto> searchFindAllDesc();\n"+
                 "\n" +
                 "\n" +
                 "}");
@@ -94,42 +96,7 @@ public class RepositoryResultScreen extends JFrame{
             e.printStackTrace();
         }
 
-        jl2 = new JLabel("@Repository: " + className+"Repository.java 일반 Repository.");
-        jta2 = new JTextArea(5,50);
-        jsp2 = new JScrollPane(jta2);
 
-        jp.add(jl2);
-        jp.add(jsp2);
-
-        jta2.setText("" +
-                "import org.springframework.data.jpa.repository.JpaRepository;\n" +
-                "import org.springframework.data.jpa.repository.Query;\n" +
-                "import org.springframework.stereotype.Repository\n" +
-                "\n" +
-                "import java.util.List;\n" +
-                "\n" +
-                "@Repository\n" +
-                "public interface "+className+"Repository extends JpaRepository<"+className+", Long> {\n" +
-                "    @Query(\"SELECT p FROM "+className+" p ORDER BY p.id DESC\")\n" +
-                "    List<"+className+"> findAllDesc();\n" +
-                "  //Page<"+className+"> findAllDesc();\n"+
-                "}");
-
-        String code2 = jta2.getText();
-
-        try {
-            File file = new File("C:\\category\\" + className + "Repository2.java");
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter writer = new BufferedWriter(fw);
-            writer.write(code2);
-            writer.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
 
     }
 }
