@@ -22,7 +22,7 @@ public class ServiceResultScreen extends JFrame{
         methodName = className.substring(0,1).toLowerCase()+className.substring(1);
         jp= new JPanel();
         jl = new JLabel("@Service: " + className+"Service");
-        jta = new JTextArea(5,50);
+        jta = new JTextArea(20,50);
         jsp = new JScrollPane(jta);
         //btn = new JButton("");
         jp.add(jl);
