@@ -18,6 +18,12 @@ public class ResultEntityScreen extends JFrame{
     private JScrollPane jsp,jsp2,jsp3,jsp4;
     private JButton btn;
 
+    public String className; //Alliance
+    public String classNameSm; //alliance
+    public String variablePrint; // private Long id; ... private String str1; ...
+    public String constPrint; // Long id, String str, ...
+    public String constInPrint; // this.id = id, this.str1 = str1, ...
+
     ResultEntityScreen(UtilStrConv usc){
         String className = usc.getClassNameTables();
         jp= new JPanel();
@@ -34,57 +40,16 @@ public class ResultEntityScreen extends JFrame{
         setTitle("@Entity class: " + className+".java");
         setBounds(300,300,650,500);
 
+        //변수 초기화.
+        className = usc.getClassNameTables();
+        classNameSm = usc.getTnSmall();
+        // private Long id; ...
+        String[] colStr = usc.getColStrs(); String[] colLong = usc.getColLongs(); String[] colDate = usc.getColDates();
+        variablePrint = usc.getVariablesPrint(colStr, colLong, colDate);
+        constPrint = usc.getConstPrint(colStr,colLong,colDate);
+        constInPrint = usc.getConstInPrint(colStr,colLong,colDate);
         //변수 이름 초기화...
-        String [] colLong = usc.getColLongs(); //Long형 칼럼. 0번이 primary key.
 
-        String privateColLongPrint="";  // private Long ...
-        String colLongPrintComma=""; // Long var1, Long var2, Long var3, ...의 형태.
-        String colLongPrintThis="";    // this.custNo = custNo;
-        String colLongPrintCommaUpdate = ""; //primary key인 배열0값을 제외한 Long var2, ...의 형태. 업데이트 메소드에 쓰임.
-        for(int i=0; i< colLong.length; i++){
-
-            colLongPrintComma = "Long " + colLong[i] + ", \n" + colLongPrintComma;
-            colLongPrintThis = "this."+colLong[i]+" = "+colLong[i]+";\n" + colLongPrintThis;
-        }
-        String privateColLongPrint0 = "private Long id;\n";
-        for(int i=1; i< colLong.length; i++){
-            privateColLongPrint = "     private Long "+colLong[i]+";\n" + privateColLongPrint;
-        }
-        colLongPrintCommaUpdate = colLongPrintComma;
-        colLongPrintComma = "Long "+colLong[0] +", "+ colLongPrintComma;
-        colLongPrintThis = "this."+colLong[0]+" = "+colLong[0]+";\n" + colLongPrintThis;
-
-        String [] colStr = usc.getColStrs();   // String형 칼럼.
-        String privateColStrPrint="";
-        String colStringPrintComma=""; // String var1, String var2, String var3, ...의 형태.
-        String colStringPrintThis="";
-        for(int i=0; i< colStr.length; i++) {
-            privateColStrPrint = "      private String "+colStr[i]+";\n" + privateColStrPrint;
-            colStringPrintComma = "String " + colStr[i] + ", \n" + colStringPrintComma;
-            colStringPrintThis = "this."+colStr[i]+" = "+colStr[i]+";\n" + colStringPrintThis;
-        }
-
-        String [] colDate = usc.getColDates(); //Date형 칼럼.
-        String privateColDatePrint = "";
-        String colDatePrintComma=""; // LocalDateTime var1, LocalDateTime var2, LocalDateTime var3, ...의 형태.
-        String colDatePrintThis="";
-        for(int i=0; i< colDate.length; i++) {
-            privateColDatePrint = "     private LocalDateTime "+colDate[i]+";\n" + privateColDatePrint;
-            colDatePrintComma = "LocalDateTime " + colDate[i] + ", \n" + colDatePrintComma;
-            colDatePrintThis = "this."+colDate[i]+" = "+colDate[i]+";\n" + colDatePrintThis;
-        }
-
-        String colPrintComma =  colLongPrintComma+ colStringPrintComma+ colDatePrintComma;
-        String colPirntCommaUpdate = colLongPrintCommaUpdate +colStringPrintComma+colDatePrintComma;
-        // 마지막 문자, ',' 콤마 제거.
-        colPrintComma = colPrintComma.trim().substring(0,colPrintComma.trim().length()-1);
-        colPirntCommaUpdate = colPirntCommaUpdate.trim().substring(0,colPirntCommaUpdate.trim().length()-1);
-
-        String privateColPrint =  privateColLongPrint+"\n"+ privateColStrPrint+"\n"+privateColDatePrint+ "\n";
-        System.out.println("String, colPrintComma, ... : "+colPrintComma);
-        System.out.println("클래스 이름, ... : "+ usc.getClassNameTables());
-        System.out.println("소문자 클래스 이름, 생성자 사용, ...: " +usc.getTnSmall());
-        System.out.println("변수 이름, private Long id, ...: " + privateColPrint);
 
         String createTable = usc.getCreateTable(colStr, colLong, colDate, usc.getTnSmall());
 
@@ -108,10 +73,7 @@ public class ResultEntityScreen extends JFrame{
                  "    @Id\n" +
                  "    @GeneratedValue(strategy = GenerationType.IDENTITY)\n" +
                  "    @Column(name = \""+usc.getTnSmall()+"_id\")\n" +
-                 "     "+privateColLongPrint0+
-                 ""+privateColLongPrint+"\n"+
-                 ""+privateColStrPrint +"\n"+
-                 ""+privateColDatePrint+"\n" +
+                 ""+variablePrint+
                  "    @ManyToOne(fetch = FetchType.LAZY)\n" +
                  "    @JoinColumn(name = \""+usc.getManyToOneJoinColumn() +"\", updatable = false)\n" +
                  "    private "+usc.getToOneTableNameClass()+" "+usc.getToOneTableNameMethod()+";\n" +
