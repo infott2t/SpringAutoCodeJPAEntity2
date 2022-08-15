@@ -1,31 +1,36 @@
 package v2;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 
-public class UtilStrConv {
+public class   UtilStrConv {
 
-    public String tableName;
-    public String columnStrings;
-    public String columnLongs;
-    public String columnDates;
-    public String savePath; //파일저장위치.
+    public static String tableName;
+    public static String columnStrings;
+    public static String columnLongs;
+    public static String columnDates;
+    public static String savePath; //파일저장위치.
 
-    public String tableNameDB; //엔티티에 적는 @Table(name="") 테이블 이름.
+    public static String tableNameDB; //엔티티에 적는 @Table(name="") 테이블 이름.
+    public static String manyToOneJoinColumn;
+    public static String manyToOneTableName;
+    public static String oneToManyMappedTable;
+    public static String oneToManyListing;
 
     //코드에 반환할 값.
-    public String tnSmall; //전부 소문자. 테이블 이름.
-    public String[] colStrs; //테이블 칼럼명. 배열. String타입.
-    public String[] colLongs; //테이블 칼럼명. 배열, Long타입. 1번째는 Primary Key.
+    public static String tnSmall; //전부 소문자. 테이블 이름.
+    public static String[] colStrs; //테이블 칼럼명. 배열. String타입.
+    public static String[] colLongs; //테이블 칼럼명. 배열, Long타입. 1번째는 Primary Key.
 
-    private String[] colDates;  //테이블 칼럼명. 배열, LocalDateTime형.
+    private static String[] colDates;  //테이블 칼럼명. 배열, LocalDateTime형.
 
-    public String classNameTables; //테이블 명으로 클래스가 되는 경우.  //getter, setter.
+    public static String classNameTables; //테이블 명으로 클래스가 되는 경우.  //getter, setter.
 
 
-    public UtilStrConv(String savePath, String tableName, String columnStrings, String columnLongs, String columnDates, String tableNameDB) {
-        this.savePath = savePath;
-        this.tableNameDB = tableNameDB;
+    public UtilStrConv(String tableName, String columnStrings, String columnLongs, String columnDates, String tableNameDBString, String manyToOneTableName,
+                       String manyToOneJoinColumn, String oneToManyMappedTable, String oneToManyListing) {
+        this.tableNameDB = tableNameDBString;
         this.tableName = tableName;
         this.columnStrings = columnStrings;
         this.columnLongs = columnLongs;
@@ -35,83 +40,182 @@ public class UtilStrConv {
         this.colLongs = columnLongs.split(",");
         this.colDates = columnDates.split(",");
         this.classNameTables = tableName;
-
-
+        this.manyToOneTableName = manyToOneTableName; //Member member
+        this.manyToOneJoinColumn = manyToOneJoinColumn; //member_id
+        this.oneToManyMappedTable = oneToManyMappedTable; //member
+        this.oneToManyListing = oneToManyListing; //BoardComment, boardcomment
     }
 
-    public String getTableName() {
+  //  setTitle(form.getTitle());\n"
+  //  setContent(form.getContent());\n"
+   // setMember(member);\n */"
+
+
+
+    public static String getToOneTableNameClass(){
+        return manyToOneTableName;
+    } //Member
+
+    public static String getManyToOneJoinColumn(){
+        return manyToOneJoinColumn;
+    } //member_id
+    public static String getToOneTableNameMethod(){
+        return manyToOneTableName.toLowerCase();
+    } //member
+    public static String getOneToManyMappedTable(){
+        return oneToManyMappedTable;
+    } //member
+    public static String getOneToManyListing(){
+        return tableName+"Comment";
+    } // BoardComment
+
+    public static String getTableName() {
         return tableName;
     }
 
-    public void setTableName(String tableName) {
-        this.tableName = tableName;
+    public static void setTableName(String tableName) {
+        tableName = tableName;
     }
 
-    public String getColumnStrings() {
+    public static String getColumnStrings() {
         return columnStrings;
     }
 
-    public void setColumnStrings(String columnStrings) {
-        this.columnStrings = columnStrings;
+    public static void setColumnStrings(String columnStrings) {
+         columnStrings = columnStrings;
     }
 
-    public String getColumnLongs() {
+    public static String getColumnLongs() {
         return columnLongs;
     }
 
-    public void setColumnLongs(String columnLongs) {
-        this.columnLongs = columnLongs;
+    public static void setColumnLongs(String columnLongs) {
+        columnLongs = columnLongs;
     }
 
-    public String getTnSmall() {
+    public static String getTnSmall() {
         return tnSmall;
     }
 
-    public void setTnSmall(String tnSmall) {
-        this.tnSmall = tnSmall;
+    public static void setTnSmall(String tnSmall) {
+        tnSmall = tnSmall;
     }
 
-    public String[] getColStrs() {
+    public static String[] getColStrs() {
         return colStrs;
     }
 
-    public void setColStrs(String[] colStrs) {
-        this.colStrs = colStrs;
+    public static void setColStrs(String[] colStrs) {
+        colStrs = colStrs;
     }
 
-    public String[] getColLongs() {
+    public static String[] getColLongs() {
         return colLongs;
     }
 
-    public void setColLongs(String[] colLongs) {
-        this.colLongs = colLongs;
+    public static void setColLongs(String[] colLongs) {
+        colLongs = colLongs;
     }
 
-    public String getClassNameTables() {
+    public static String getClassNameTables() {
         return classNameTables;
     }
 
-    public void setClassNameTables(String classNameTables) {
-        this.classNameTables = classNameTables;
+    public static void setClassNameTables(String classNameTables) {
+        classNameTables = classNameTables;
     }
 
-    public String getSavePath() {
+    public static String getSavePath() {
         return savePath;
     }
 
-    public void setSavePath(String savePath) {
-        this.savePath = savePath;
+    public static void setSavePath(String savePath) {
+        savePath = savePath;
     }
 
-    public String getTableNameDB() {
+    public static String getTableNameDB() {
         return tableNameDB;
     }
 
-    public void setTableNameDB(String tableNameDB) {
-        this.tableNameDB = tableNameDB;
+    public static void setTableNameDB(String tableNameDB) {
+        tableNameDB = tableNameDB;
     }
 
-    public String[] getColDates() {
+    public static String[] getColDates() {
         return colDates;
+    }
+
+    public static String getCreateTable(String[] colStr, String[] colLong, String[] colDate, String tablename) {
+
+        /**
+         * setTitle(
+         * 첫글자 대문자로 바꾸기, firstUpperCase(str)
+         * set + firstUpperCase(str) + (
+
+        colStr = firstUpperCase(colStr);
+        colLong = firstUpperCase(colLong);
+        colDate = firstUpperCase(colDate);
+
+        String setStrStringFront []= new String[colStr.length];
+        for(int i=0; i< colStr.length; i++){
+            setStrStringFront[i] = "set"+colStr[i]+"(";
+            System.out.println( setStrStringFront[i]);
+        }
+
+        String setLongStringFront [] =new String[colLong.length];
+        for(int i=1; i< colLong.length; i++){
+            setLongStringFront[i] = "set"+colLong[i]+"(";
+            System.out.println(setLongStringFront[i]);
+        }
+         */
+
+        /**
+         * setTitle(
+         * 첫글자 대문자로 바꾸기, firstUpperCase(str)
+         * board.set + firstUpperCase(str) + (form.get + firstUpperCase(str) + ());
+         */
+         colStr = firstUpperCase(colStr);
+         colLong = firstUpperCase(colLong);
+         colDate = firstUpperCase(colDate);
+
+         String setStrString []= new String[colStr.length];
+         String setStrPrint = null;
+         for(int i=0; i< colStr.length; i++){
+         setStrString[i] = tablename+".set"+colStr[i]+"(form.get"+colStr[i]+"());\n";
+         setStrPrint = setStrString[i]+setStrPrint;
+         System.out.println( setStrString[i]);
+         }
+
+         String setLongString [] =new String[colLong.length];
+         String setLongPrint = null;
+         for(int i=1; i< colLong.length; i++){
+         setLongString[i] = tablename+".set"+colLong[i]+"(form.get"+colLong[i]+"());\n";
+         setLongPrint = setLongString[i] + setLongPrint;
+         System.out.println(setLongString[i]);
+         }
+
+        String setDateString [] =new String[colDate.length];
+         String setDatePrint = null;
+        for(int i=0; i< colDate.length; i++){
+            setDateString[i] = tablename+".set"+colDate[i]+"(form.get"+colDate[i]+"());\n";
+            setDatePrint = setDateString[i] + setDatePrint;
+            System.out.println(setDateString[i]);
+
+        }
+
+        ArrayList<String[]> arr = new ArrayList<String[]>();
+        arr.add(setStrString);
+        arr.add(setLongString);
+        arr.add(setDateString);
+
+        return setStrPrint + "\n" + setLongPrint + "\n" + setDatePrint;
+    }
+
+    //앞글자 대문자로 바꾸기. getCreateTable(), getTitle... 사용.
+    public static String[] firstUpperCase(String[] str){
+        for(int i=0; i< str.length; i++) {
+            str[i]=str[i].substring(0, 1).toUpperCase() + str[i].substring(1);
+        }
+        return str;
     }
 }

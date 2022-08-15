@@ -4,24 +4,22 @@ import javax.swing.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-public class ResultEntityScreen extends JFrame{
+public class ResultSaveFormScreen extends JFrame{
 
     private JPanel jp;
-    private JLabel jl,jl2,jl3,jl4,jl5,jl6,jl7,jl8,jl9
-            ,jl10;
-
+    private JLabel jl,jl2,jl3,jl4,jl5,jl6,jl7,jl8,jl9;
     private JTextField jtf, jtf2,jtf3,jtf4,jtf5;
     private JTextArea jta,jta2,jta3,jta4;
     private JScrollPane jsp,jsp2,jsp3,jsp4;
     private JButton btn;
 
-    ResultEntityScreen(UtilStrConv usc){
+    public String className; //Alliance
+
+    ResultSaveFormScreen(UtilStrConv usc){
         String className = usc.getClassNameTables();
         jp= new JPanel();
-        jl = new JLabel("@Entity class: " + className);
+        jl = new JLabel("@Data: " + className+"SaveForm");
         jta = new JTextArea(20,50);
         jsp = new JScrollPane(jta);
         //btn = new JButton("");
@@ -31,7 +29,7 @@ public class ResultEntityScreen extends JFrame{
         add(jp);
         setVisible(true);
         setResizable(true);
-        setTitle("@Entity class: " + className+".java");
+        setTitle("Form: " + className+"SaveForm.java");
         setBounds(300,300,650,500);
 
         //변수 이름 초기화...
@@ -86,62 +84,61 @@ public class ResultEntityScreen extends JFrame{
         System.out.println("소문자 클래스 이름, 생성자 사용, ...: " +usc.getTnSmall());
         System.out.println("변수 이름, private Long id, ...: " + privateColPrint);
 
-        String createTable = usc.getCreateTable(colStr, colLong, colDate, usc.getTnSmall());
+        jta.setText("" +
+                "" +
+                "\n" +
+                "import lombok.Data;\n" +
+                "import lombok.Getter;\n" +
+                "import lombok.Setter;\n" +
+                "\n" +
+                "import javax.validation.constraints.*;\n" +
+                "\n" +
+                "/**\n" +
+                " * 실무에서는 등록폼 객체와 수정폼 객체를 별도로 만들어 사용한다.\n" +
+                " * groups 는 복잡하고 잘 사용하지 않는다. 저장이므로 id가 없다.\n" +
+                " */\n" +
+                "@Data\n" +
+                "public class "+className+"SaveForm {\n" +
+                "\n" +
+                " /*  작성 예시\n" +
+                "    @NotEmpty(message = \"제목은 필수 입력입니다.\")\n" +
+                "    private String title;\n" +
+                "\n" +
+                "    @NotEmpty(message = \"내용은 필수 입력입니다.\")\n" +
+                "    private String content; \n" +
+                " */\n"+
+                "      "+privateColLongPrint+"\n"+
+                "     "+privateColStrPrint +"\n"+
+                "     "+privateColDatePrint+"\n" +
+                "\n\n" +
+                "\n" +
 
-         jta.setText("" +
-                "import com.fasterxml.jackson.annotation.JsonIgnore;\n" +
-                 "import lombok.Getter;\n" +
-                 "import lombok.RequiredArgsConstructor;\n" +
-                 "import lombok.Setter;\n" +
-                 "\n" +
-                 "import javax.persistence.*;\n" +
-                 "import java.util.ArrayList;\n" +
-                 "import java.util.List;\n" +
-                 "\n" +
-                 "@Entity\n" +
-                 "@Getter\n" +
-                 "@Setter\n" +
-                 "@RequiredArgsConstructor\n" +
-                 "@Table(name =\""+usc.getTableNameDB()+"\")\n" +
-                 "public class "+usc.getClassNameTables()+" {\n" +
-                 "\n" +
-                 "    @Id\n" +
-                 "    @GeneratedValue(strategy = GenerationType.IDENTITY)\n" +
-                 "    @Column(name = \""+usc.getTnSmall()+"_id\")\n" +
-                 "     " +privateColLongPrint0+
-                 "      "+privateColLongPrint+"\n"+
-                 "     "+privateColStrPrint +"\n"+
-                 "     "+privateColDatePrint+"\n" +
-                 "    @ManyToOne(fetch = FetchType.LAZY)\n" +
-                 "    @JoinColumn(name = \""+usc.getManyToOneJoinColumn() +"\", updatable = false)\n" +
-                 "    private "+usc.getToOneTableNameClass()+" "+usc.getToOneTableNameMethod()+";\n" +
-                 "\n" +
-                 "    @JsonIgnore\n" +
-                 "    @OneToMany(mappedBy = \""+usc.getOneToManyMappedTable()+"\")\n" +
-                 "    private List<BoardComment> boardComments = new ArrayList<>();\n" +
-                 "  \n" +
-                 "\n" +
-                 "    // 연관 관계 메서드\n" +
-                 "    public void set"+usc.getToOneTableNameClass()+"("+usc.getToOneTableNameClass()+" "+usc.getToOneTableNameMethod()+") {\n" +
-                 "        this."+usc.getToOneTableNameMethod()+" = "+usc.getToOneTableNameMethod()+";\n" +
-                 "        "+usc.getToOneTableNameMethod()+".getBoards().add(this);\n" +
-                 "    }\n" +
-                 "\n" +
-                 "    // 생성 메서드\n" +
-                 "    public static "+usc.getClassNameTables()+" create"+usc.getClassNameTables()+"("+usc.getClassNameTables()+" "+usc.getTnSmall()+", "+usc.getClassNameTables()+"SaveForm form) {\n" +
-                 "        "+usc.getClassNameTables()+" "+usc.getTnSmall()+" = new "+usc.getClassNameTables()+"();\n" +
-                 "        "+createTable +
-
-                 "        "+usc.getTnSmall()+".set"+usc.getToOneTableNameClass()+"("+usc.getToOneTableNameMethod()+");\n " +
-                 "        return "+usc.getTnSmall()+";\n" +
-                 "    }\n" +
-                 "\n" +
-                 "}");
+                "//    @AssertFalse : false 값만 통과 가능\n" +
+                "//    @AssertTrue : true 값만 통과 가능\n" +
+                "//    @DecimalMax(value=) : 지정된 값 이하의 실수만 통과 가능\n" +
+                "//    @DecimalMin(value=) : 지정된 값 이상의 실수만 통과 가능\n" +
+                "//    @Digits(integer=,fraction=) : 대상 수가 지정된 정수와 소수 자리수보다 적을 경우 통과 가능\n" +
+                "//    @Email\n" +
+                "//    @Future : 대상 날짜가 현재보다 미래일 경우만 통과 가능\n" +
+                "//    @Past : 대상 날짜가 현재보다 과거일 경우만 통과 가능\n" +
+                "//    @Max(value) : 지정된 값보다 아래일 경우만 통과 가능\n" +
+                "//    @Min(value) : 지정된 값보다 이상일 경우만 통과 가능\n" +
+                "//    @Negative // 음수만 허용\n" +
+                "//    @NegativeOrZero // 음수와 0만 허용\n" +
+                "//    @NotNull : null 값이 아닐 경우만 통과 가능\n" +
+                "//    @NotEmpty : null, \"\" 이 아닌 경우\n" +
+                "//    @NotBlank : null, \"\", \" \" 이 아닌 경우\n" +
+                "//    @Null : null일 경우만 통과 가능\n" +
+                "//    @Pattern(regex=, flag=, message=) : 해당 정규식을 만족할 경우만 통과 가능\n" +
+                "//    @Positive // 양수만 허용\n" +
+                "//    @PositiveOrZero // 양수와 0만 허용\n" +
+                "//    @Size(min=, max=) : 문자열 또는 배열이 지정된 값 사이일 경우 통과 가능\n" +
+                "}\n");
 
         String code = jta.getText();
 
         try {
-            File file = new File("C:\\category\\" + usc.getClassNameTables() + ".java");
+            File file = new File("C:\\category\\" + className + "SaveForm.java");
             if (!file.exists()) {
                 file.createNewFile();
             }

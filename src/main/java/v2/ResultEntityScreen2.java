@@ -4,10 +4,8 @@ import javax.swing.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-public class ResultEntityScreen extends JFrame{
+public class ResultEntityScreen2 extends JFrame{
 
     private JPanel jp;
     private JLabel jl,jl2,jl3,jl4,jl5,jl6,jl7,jl8,jl9
@@ -18,7 +16,7 @@ public class ResultEntityScreen extends JFrame{
     private JScrollPane jsp,jsp2,jsp3,jsp4;
     private JButton btn;
 
-    ResultEntityScreen(UtilStrConv usc){
+    ResultEntityScreen2(UtilStrConv usc){
         String className = usc.getClassNameTables();
         jp= new JPanel();
         jl = new JLabel("@Entity class: " + className);
@@ -31,7 +29,7 @@ public class ResultEntityScreen extends JFrame{
         add(jp);
         setVisible(true);
         setResizable(true);
-        setTitle("@Entity class: " + className+".java");
+        setTitle("@Entity class: " + className);
         setBounds(300,300,650,500);
 
         //변수 이름 초기화...
@@ -42,13 +40,9 @@ public class ResultEntityScreen extends JFrame{
         String colLongPrintThis="";    // this.custNo = custNo;
         String colLongPrintCommaUpdate = ""; //primary key인 배열0값을 제외한 Long var2, ...의 형태. 업데이트 메소드에 쓰임.
         for(int i=0; i< colLong.length; i++){
-
+            privateColLongPrint = "private Long "+colLong[i]+";\n" + privateColLongPrint;
             colLongPrintComma = "Long " + colLong[i] + ", \n" + colLongPrintComma;
             colLongPrintThis = "this."+colLong[i]+" = "+colLong[i]+";\n" + colLongPrintThis;
-        }
-        String privateColLongPrint0 = "private Long id;\n";
-        for(int i=1; i< colLong.length; i++){
-            privateColLongPrint = "private Long "+colLong[i]+";\n" + privateColLongPrint;
         }
         colLongPrintCommaUpdate = colLongPrintComma;
         colLongPrintComma = "Long "+colLong[0] +", "+ colLongPrintComma;
@@ -86,8 +80,6 @@ public class ResultEntityScreen extends JFrame{
         System.out.println("소문자 클래스 이름, 생성자 사용, ...: " +usc.getTnSmall());
         System.out.println("변수 이름, private Long id, ...: " + privateColPrint);
 
-        String createTable = usc.getCreateTable(colStr, colLong, colDate, usc.getTnSmall());
-
          jta.setText("" +
                 "import com.fasterxml.jackson.annotation.JsonIgnore;\n" +
                  "import lombok.Getter;\n" +
@@ -108,38 +100,36 @@ public class ResultEntityScreen extends JFrame{
                  "    @Id\n" +
                  "    @GeneratedValue(strategy = GenerationType.IDENTITY)\n" +
                  "    @Column(name = \""+usc.getTnSmall()+"_id\")\n" +
-                 "     " +privateColLongPrint0+
-                 "      "+privateColLongPrint+"\n"+
+                 "     "+privateColLongPrint+"\n"+
                  "     "+privateColStrPrint +"\n"+
                  "     "+privateColDatePrint+"\n" +
-                 "    @ManyToOne(fetch = FetchType.LAZY)\n" +
-                 "    @JoinColumn(name = \""+usc.getManyToOneJoinColumn() +"\", updatable = false)\n" +
-                 "    private "+usc.getToOneTableNameClass()+" "+usc.getToOneTableNameMethod()+";\n" +
+                 "  /*  @ManyToOne(fetch = FetchType.LAZY)\n" +
+                 "    @JoinColumn(name = \"member_id\", updatable = false)\n" +
+                 "    private Member member;\n" +
                  "\n" +
                  "    @JsonIgnore\n" +
-                 "    @OneToMany(mappedBy = \""+usc.getOneToManyMappedTable()+"\")\n" +
+                 "    @OneToMany(mappedBy = \"member\")\n" +
                  "    private List<BoardComment> boardComments = new ArrayList<>();\n" +
                  "  \n" +
                  "\n" +
                  "    // 연관 관계 메서드\n" +
-                 "    public void set"+usc.getToOneTableNameClass()+"("+usc.getToOneTableNameClass()+" "+usc.getToOneTableNameMethod()+") {\n" +
-                 "        this."+usc.getToOneTableNameMethod()+" = "+usc.getToOneTableNameMethod()+";\n" +
-                 "        "+usc.getToOneTableNameMethod()+".getBoards().add(this);\n" +
+                 "    public void setMember(Member member) {\n" +
+                 "        this.member = member;\n" +
+                 "        member.getBoards().add(this);\n" +
                  "    }\n" +
-                 "\n" +
+                 "*/\n" +
                  "    // 생성 메서드\n" +
-                 "    public static "+usc.getClassNameTables()+" create"+usc.getClassNameTables()+"("+usc.getClassNameTables()+" "+usc.getTnSmall()+", "+usc.getClassNameTables()+"SaveForm form) {\n" +
+                 "    public static "+usc.getClassNameTables()+" create"+usc.getClassNameTables()+"(Member member, "+usc.getClassNameTables()+"Form form) {\n" +
                  "        "+usc.getClassNameTables()+" "+usc.getTnSmall()+" = new "+usc.getClassNameTables()+"();\n" +
-                 "        "+createTable +
-
-                 "        "+usc.getTnSmall()+".set"+usc.getToOneTableNameClass()+"("+usc.getToOneTableNameMethod()+");\n " +
+                 "    /*    board.setTitle(form.getTitle());\n" +
+                 "        board.setContent(form.getContent());\n" +
+                 "        board.setMember(member);\n */" +
                  "        return "+usc.getTnSmall()+";\n" +
                  "    }\n" +
                  "\n" +
                  "}");
 
         String code = jta.getText();
-
         try {
             File file = new File("C:\\category\\" + usc.getClassNameTables() + ".java");
             if (!file.exists()) {

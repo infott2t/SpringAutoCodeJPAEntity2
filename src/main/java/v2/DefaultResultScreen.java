@@ -1,6 +1,9 @@
 package v2;
 
 import javax.swing.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class DefaultResultScreen extends JFrame{
 
@@ -11,10 +14,12 @@ public class DefaultResultScreen extends JFrame{
     private JScrollPane jsp,jsp2,jsp3,jsp4;
     private JButton btn;
 
+    public String className; //Alliance
+
     DefaultResultScreen(UtilStrConv usc){
-        String className = usc.getClassNameTables();
+        className = usc.getClassNameTables();
         jp= new JPanel();
-        jl = new JLabel("@Entity class: " + className);
+        jl = new JLabel("@Data: " + className+"Form");
         jta = new JTextArea(5,50);
         jsp = new JScrollPane(jta);
         //btn = new JButton("");
@@ -24,7 +29,25 @@ public class DefaultResultScreen extends JFrame{
         add(jp);
         setVisible(true);
         setResizable(true);
-        setTitle("@Entity class: " + className);
+        setTitle(": " + className);
         setBounds(300,300,650,500);
+
+        jta.setText("");
+
+        String code = jta.getText();
+
+        try {
+            File file = new File("C:\\category\\" + className + ".java");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter writer = new BufferedWriter(fw);
+            writer.write(code);
+            writer.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
