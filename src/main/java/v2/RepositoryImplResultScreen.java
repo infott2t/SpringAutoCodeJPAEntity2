@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Locale;
 
 public class RepositoryImplResultScreen extends JFrame{
 
@@ -16,12 +17,14 @@ public class RepositoryImplResultScreen extends JFrame{
 
     public String className; //Alliance
     public String classNameSm; //alliance
+    public String classNameSmFirst; //allianceToA...
     public String sqlNewPrint; // alliance.id, alliance.title, ...
     RepositoryImplResultScreen(UtilStrConv usc){
         className = usc.getClassNameTables();
         classNameSm = usc.getTnSmall();
+        classNameSmFirst = className.substring(0,1).toLowerCase() + className.substring(1);
         String[] colStr = usc.getColStrs(); String[] colLong = usc.getColLongs(); String[] colDate = usc.getColDates();
-        sqlNewPrint = usc.getNewsqlPrint(colLong,colStr,colDate,className,classNameSm);
+        sqlNewPrint = usc.getNewsqlPrint(colLong,colStr,colDate,className,classNameSmFirst);
         jp= new JPanel();
         jl = new JLabel("@Repository: " + className+"RepositoryImpl");
         jta = new JTextArea(20,50);
@@ -53,7 +56,7 @@ public class RepositoryImplResultScreen extends JFrame{
                 "\n" +
                 "//import static goodshop.board.alliance.QAlliance.alliance;\n" +
                 "//Entity클래스를 Q로 바꾸어서 저장.\n" +
-                "import static goodshop.....Q"+className+"."+classNameSm+";\n" +
+                "import static goodshop.....Q"+className+"."+classNameSmFirst+";\n" +
                 "import static org.springframework.util.StringUtils.hasText;\n" +
                 "\n" +
                 "\n" +
@@ -78,18 +81,18 @@ public class RepositoryImplResultScreen extends JFrame{
                 "        List<"+className+"Dto> content = queryFactory.\n" +
                 "                select(new Q"+className+"Dto(\n" +
                 sqlNewPrint +
-                "                )).from("+classNameSm+")\n" +
+                "                )).from("+classNameSmFirst+")\n" +
                 "                .where(\n" +
                 "                     //   searchAllV2Predicate(condition)\n" +
                 "                )\n" +
-                "                .orderBy("+classNameSm+".id.desc())\n" +
+                "                .orderBy("+classNameSmFirst+".id.desc())\n" +
                 "                .offset(pageable.getOffset())\n" +
                 "                .limit(pageable.getPageSize())\n" +
                 "                .fetch();\n" +
                 "\n" +
                 "        long total = queryFactory\n" +
-                "                .select("+classNameSm+".count())\n" +
-                "                .from("+classNameSm+")\n" +
+                "                .select("+classNameSmFirst+".count())\n" +
+                "                .from("+classNameSmFirst+")\n" +
                 "                .where(\n" +
                 "                    //    searchAllV2Predicate(condition)\n" +
                 "                )\n" +
@@ -165,8 +168,8 @@ public class RepositoryImplResultScreen extends JFrame{
                 "        List<"+className+"ApiDto> content = queryFactory.\n" +
                 "                select(Projections.constructor("+className+"ApiDto.class,\n" +
                 sqlNewPrint+
-                "                )).from("+classNameSm+")\n" +
-                "                .orderBy("+classNameSm+".id.asc())\n" +
+                "                )).from("+classNameSmFirst+")\n" +
+                "                .orderBy("+classNameSmFirst+".id.asc())\n" +
                 "                .fetch();\n" +
                 "\n" +
                 "\n" +
