@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
-public class DtoResultScreen extends JFrame{
+public class HashMapInputScreen extends JFrame{
 
     private JPanel jp;
     private JLabel jl,jl2,jl3,jl4,jl5,jl6,jl7,jl8,jl9;
@@ -15,24 +15,22 @@ public class DtoResultScreen extends JFrame{
     private JButton btn;
 
     public String className; //Alliance
-    public String classNameSm; //alliance
-    public String variablePrint; // private Long id; ... private String str1; ...
-    public String constPrint; // Long id, String str, ...
-    public String constInPrint; // this.id = id, this.str1 = str1, ...
-    DtoResultScreen(UtilStrConv usc){
+    public String classNameSm; //alliance.
 
+
+    HashMapInputScreen(UtilStrConv usc){
+        className = usc.getClassNameTables();
         //변수 초기화.
         className = usc.getClassNameTables();
         classNameSm = usc.getTnSmall();
         // private Long id; ...
         String[] colStr = usc.getColStrs(); String[] colLong = usc.getColLongs(); String[] colDate = usc.getColDates();
 
-        variablePrint = usc.getVariablesPrint(colStr, colLong, colDate);
-        constPrint = usc.getConstPrint(colStr,colLong,colDate);
-        constInPrint = usc.getConstInPrint(colStr,colLong,colDate);
+        String printHashMap = usc.getPrintHashMap(classNameSm, colStr, colLong, colDate);
+
         jp= new JPanel();
-        jl = new JLabel("@Data: " + className+"Dto");
-        jta = new JTextArea(15,50);
+        jl = new JLabel("Util: " + className+", HashMap Print");
+        jta = new JTextArea(20,50);
         jsp = new JScrollPane(jta);
         //btn = new JButton("");
         jp.add(jl);
@@ -41,27 +39,25 @@ public class DtoResultScreen extends JFrame{
         add(jp);
         setVisible(true);
         setResizable(true);
-        setTitle("Dto: " + className+"Dto.java");
+        setTitle(": " + className+", HashMap Print");
         setBounds(300,300,650,500);
-
+/*
+        "        HashMap<String, Object> hashMap = new HashMap<>();\n" +
+                "        hashMap.put(\"content\", noticeApiList);\n" +
+                "        hashMap.put(\"pageable\", noticeList.getPageable());\n" +
+                "        hashMap.put(\"totalElements\", noticeList.getTotalElements());\n" +
+                "        hashMap.put(\"totalPages\", noticeList.getTotalPages());\n" +
+                "        hashMap.put(\"size\", noticeList.getSize());");
+*/
         jta.setText("" +
-                "import com.querydsl.core.annotations.QueryProjection;\n" +
-                "import lombok.Data;\n" +
-                "\n" +
-                "@Data\n" +
-                "public class "+className+"Dto {\n" +
-                ""+variablePrint+
-                "\n" +
-                "    @QueryProjection\n" +
-                "    public "+className+"Dto("+constPrint+") {\n" +
-                ""+constInPrint+"\n"+
-                "    }\n" +
-                "}");
+                "        HashMap<String, Object> hashMap = new HashMap<>();\n"
+                +printHashMap
+                );
 
         String code = jta.getText();
 
         try {
-            File file = new File("C:\\category\\" + className + "Dto.java");
+            File file = new File("C:\\category\\" + className + "HashMapPrint.java");
             if (!file.exists()) {
                 file.createNewFile();
             }

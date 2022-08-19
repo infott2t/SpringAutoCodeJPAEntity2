@@ -341,4 +341,29 @@ public class   UtilStrConv {
 
         return colLongs + colStrs + colDates;
     }
+
+    public String getPrintHashMap(String classSm, String[] colStr, String[] colLong, String[] colDate) {
+
+        String hashMapPrint = "";
+        String colStrPrint = "";
+        String colLongPrint = "";
+        String colDatePrint = "";
+
+        String[] getcolStr = firstUpperCase(colStr);
+        String[] getcolLong = firstUpperCase(colLong);
+        String[] getcolDate= firstUpperCase(colDate);
+
+        for(int i=0; i< colStr.length; i++){
+            colStrPrint = colStrPrint +"        hashMap.put(\""+colStr[i]+"\", "+classSm+".get"+getcolStr[i]+"());\n";
+        }
+        for(int i=0; i< colLong.length; i++){
+            colLongPrint = colLongPrint +"        hashMap.put(\""+colLong[i]+"\", "+classSm+".get"+getcolLong[i]+"());\n";
+        }
+        for(int i=0; i< colDate.length; i++){
+            colDatePrint = colDatePrint +"        hashMap.put(\""+colDate[i]+"\", "+classSm+".get"+getcolDate[i]+"());\n";
+        }
+
+        hashMapPrint = colLongPrint + colStrPrint +  colDatePrint;
+        return hashMapPrint;
+    }
 }

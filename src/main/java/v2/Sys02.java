@@ -97,6 +97,7 @@ public class Sys02 extends JFrame{
                 new ApiDtoResultScreen(usc);
                 new RestControllerResultScreen(usc);
                 new ServiceResultScreen(usc);
+                new HashMapInputScreen(usc);
             }
         });
     }

@@ -20,7 +20,7 @@ public class DefaultResultScreen extends JFrame{
         className = usc.getClassNameTables();
         jp= new JPanel();
         jl = new JLabel("@Data: " + className+"Form");
-        jta = new JTextArea(5,50);
+        jta = new JTextArea(20,50);
         jsp = new JScrollPane(jta);
         //btn = new JButton("");
         jp.add(jl);
