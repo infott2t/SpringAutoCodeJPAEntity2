@@ -15,19 +15,19 @@ public class DtoResultScreen extends JFrame{
     private JButton btn;
 
     public String className; //Alliance
-    public String[] colStrV, colLongV, colDateV;
+    public String[] colStr, colLong, colDate;
     public String variablePrint, constPrint, constInPrint;
 
     DtoResultScreen(UtilStrConvV3 usc){
-        className = usc.getClassNameTables();
+        className = usc.getTableName();
 
-        colStrV = usc.getStrsConVVari();colLongV = usc.getLongsConVVari(); colDateV = usc.getDatesConVVari();
-        variablePrint = usc.getVariablesPrint(colStrV, colLongV, colDateV);
-        constPrint = usc.getConstPrint(colStrV,colLongV,colDateV);
-        constInPrint = usc.getConstInPrint(colStrV,colLongV,colDateV);
+        colStr = usc.getColStrs(); colLong = usc.getColLongs(); colDate = usc.getColDates();
+        variablePrint = usc.getVariablesPrint(colStr, colLong, colDate);
+        constPrint = usc.getConstPrint(colStr,colLong,colDate);
+        constInPrint = usc.getConstInPrint(colStr,colLong,colDate);
 
         jp= new JPanel();
-        jl = new JLabel("Util: " + className+"ConversionSql");
+        jl = new JLabel("@Data: " + className+"ApiDto.java");
         jta = new JTextArea(20,50);
         jsp = new JScrollPane(jta);
         //btn = new JButton("");
@@ -37,7 +37,7 @@ public class DtoResultScreen extends JFrame{
         add(jp);
         setVisible(true);
         setResizable(true);
-        setTitle(": " + className+"ConversionSql");
+        setTitle("@Data: " + className+"ApiDto.java");
         setBounds(300,300,650,500);
 
         jta.setText("@Data\n" +

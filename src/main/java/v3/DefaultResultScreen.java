@@ -19,7 +19,7 @@ public class DefaultResultScreen extends JFrame{
     public String className; //Alliance
 
     DefaultResultScreen(UtilStrConvV3 usc){
-        className = usc.getClassNameTables();
+        className = usc.getTableName();
         jp= new JPanel();
         jl = new JLabel("@Data: " + className+"Form");
         jta = new JTextArea(20,50);
