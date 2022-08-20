@@ -46,7 +46,9 @@ public class   UtilStrConv {
         this.oneToManyListing = oneToManyListing; //BoardComment, boardcomment
     }
 
-  //  setTitle(form.getTitle());\n"
+
+
+    //  setTitle(form.getTitle());\n"
   //  setContent(form.getContent());\n"
    // setMember(member);\n */"
 
