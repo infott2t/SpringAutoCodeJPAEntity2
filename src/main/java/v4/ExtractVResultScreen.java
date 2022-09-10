@@ -34,11 +34,11 @@ public class ExtractVResultScreen extends JFrame{
         setTitle(": " + className);
         setBounds(300,300,650,500);
 
-        String result = null;
+        String result = "";
         String[] calV = usc.getValBefore();
         for(int i = 0; i<calV.length;i++){
             System.out.println(calV[i]);
-            result = calV[i] + "\n";
+            result = result + calV[i] + "\n";
         }
 
         jta.setText(result);

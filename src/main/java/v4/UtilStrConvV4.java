@@ -29,6 +29,34 @@ public class UtilStrConvV4 {
             String valBefore0 = frontval + backvalUpp+backvalLow;
             valBefore[i] = valBefore0;
 
+             a =valBefore[i].indexOf("_");
+            if(a == -1){continue;}
+            System.out.println("index, _ : " + a);
+             frontval = valBefore[i].substring(0,a);
+             backval = valBefore[i].substring(a+1);
+
+             backvalUpp = backval.substring(0,1);
+            backvalUpp = backvalUpp.toUpperCase();
+             backvalLow = backval.substring(1);
+            System.out.println(frontval + backvalUpp+backvalLow);
+             valBefore0 = frontval + backvalUpp+backvalLow;
+            valBefore[i] = valBefore0;
+
+            a =valBefore[i].indexOf("_");
+            if(a == -1){continue;}
+            System.out.println("index, _ : " + a);
+            frontval = valBefore[i].substring(0,a);
+            backval = valBefore[i].substring(a+1);
+
+            backvalUpp = backval.substring(0,1);
+            backvalUpp = backvalUpp.toUpperCase();
+            backvalLow = backval.substring(1);
+            System.out.println(frontval + backvalUpp+backvalLow);
+            valBefore0 = frontval + backvalUpp+backvalLow;
+            valBefore[i] = valBefore0;
+
+
+
         }
         this.valBefore = valBefore;
         this.tableName = tableName;
