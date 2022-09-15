@@ -61,7 +61,7 @@ public class RestControllerResultScreen extends JFrame{
                 "\n" +
                 "        List<"+className+"ApiDto> dto  = "+methodName+"Service.searchFindAllDesc();\n" +
                 "\n" +
-                "        //JSONArray를 만들고, 그 안에 JSONObject를 담는다.\n" +
+                ".\n" +
                 "        JSONArray jsonArr = new JSONArray();\n" +
                 "        JSONObject obj = new JSONObject();\n" +
                 "        obj.put(\"data\", dto);\n" +

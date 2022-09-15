@@ -56,17 +56,13 @@ public class RepositoryImplResultScreen extends JFrame{
                 "import java.util.List;\n" +
                 "\n" +
                 "//import static goodshop.board.alliance.QAlliance.alliance;\n" +
-                "//Entity클래스를 Q로 바꾸어서 저장.\n" +
+                "\n" +
                 "import static goodshop.....Q"+className+"."+classNameSmFirst+";\n" +
                 "import static org.springframework.util.StringUtils.hasText;\n" +
                 "\n" +
                 "\n" +
                 "\n" +
                 "\n" +
-                "/**\n" +
-                " * QType 생성이 안된 경우, 우측 측면 상단 Gradle 탭을 누른후, Tasks/other/compileJava 클릭\n" +
-                " * 검색시 BooleanExpression 보다 (BooleanBuilder 와 Predicate) 사용을 권장\n" +
-                " */\n" +
                 "public class "+className+"RepositoryImpl implements "+className+"RepositoryCustom {\n" +
                 "\n" +
                 "    private final JPAQueryFactory queryFactory;\n" +

@@ -41,11 +41,11 @@ public class SearchConditionResultScreen extends JFrame{
                 "@Data\n" +
                 "public class "+className+"SearchCondition {\n" +
                 "\n" +
-                "    private String field;      // select태그가 있는 경우.\n" +
-                "    private String s;          // TextFiled가 있는 경우.\n" +
+                "    private String field;       \n" +
+                "    private String s;          \n" +
                 "\n" +
-                "    private String sdate;      // 시작날짜.\n" +
-                "    private String edate;      // 끝 날짜.\n" +
+                "    private String sdate;      \n" +
+                "    private String edate;      \n" +
                 "}");
 
         String code = jta.getText();

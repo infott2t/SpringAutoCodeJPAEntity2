@@ -50,7 +50,7 @@ public class ApiDtoResultScreen extends JFrame{
                 "import lombok.Data;\n" +
                 "\n" +
                 "@Data\n" +
-                "//일부 값을 select하기 위해 사용하는 Dto. 값을 제거하거나 해서 사용.\n"+
+                "\n"+
                 "public class "+className+"ApiDto {\n" +
                 ""+variablePrint+
                 "\n" +

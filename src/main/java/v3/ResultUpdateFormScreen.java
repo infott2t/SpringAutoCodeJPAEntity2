@@ -96,21 +96,18 @@ public class ResultUpdateFormScreen extends JFrame{
                 "\n" +
                 "import javax.validation.constraints.*;\n" +
                 "\n" +
-                "/**\n" +
-                " * 실무에서는 등록폼 객체와 수정폼 객체를 별도로 만들어 사용한다.\n" +
-                " * groups 는 복잡하고 잘 사용하지 않는다.\n" +
-                " */\n" +
+
                 "@Data\n" +
                 "public class "+className+"UpdateForm {\n" +
                 "\n"+
                 " /* 작성예시.\n" +
-                        "    @NotNull(message = \"잘못된 접속입니다.\")\n" +
+                        "    @NotNull(message = \"Notice Message in...\")\n" +
                         "    private Long id;\n" +
                         "\n" +
-                        "    @NotEmpty(message = \"제목은 필수 입력입니다.\")\n" +
+                        "    @NotEmpty(message = \"Notice Message in...\")\n" +
                         "    private String title;\n" +
                         "\n" +
-                        "    @NotEmpty(message = \"내용은 필수 입력입니다.\")\n" +
+                        "    @NotEmpty(message = \"Notice Message in...\")\n" +
                         "    private String content;\n" +
                         "\n" +
                         "    private Long memberId;\n" +
@@ -121,26 +118,7 @@ public class ResultUpdateFormScreen extends JFrame{
                         "     "+privateColDatePrint+"\n" +
                 "\n\n" +
 
-                "//    @AssertFalse : false 값만 통과 가능\n" +
-                "//    @AssertTrue : true 값만 통과 가능\n" +
-                "//    @DecimalMax(value=) : 지정된 값 이하의 실수만 통과 가능\n" +
-                "//    @DecimalMin(value=) : 지정된 값 이상의 실수만 통과 가능\n" +
-                "//    @Digits(integer=,fraction=) : 대상 수가 지정된 정수와 소수 자리수보다 적을 경우 통과 가능\n" +
-                "//    @Email\n" +
-                "//    @Future : 대상 날짜가 현재보다 미래일 경우만 통과 가능\n" +
-                "//    @Past : 대상 날짜가 현재보다 과거일 경우만 통과 가능\n" +
-                "//    @Max(value) : 지정된 값보다 아래일 경우만 통과 가능\n" +
-                "//    @Min(value) : 지정된 값보다 이상일 경우만 통과 가능\n" +
-                "//    @Negative // 음수만 허용\n" +
-                "//    @NegativeOrZero // 음수와 0만 허용\n" +
-                "//    @NotNull : null 값이 아닐 경우만 통과 가능\n" +
-                "//    @NotEmpty : null, \"\" 이 아닌 경우\n" +
-                "//    @NotBlank : null, \"\", \" \" 이 아닌 경우\n" +
-                "//    @Null : null일 경우만 통과 가능\n" +
-                "//    @Pattern(regex=, flag=, message=) : 해당 정규식을 만족할 경우만 통과 가능\n" +
-                "//    @Positive // 양수만 허용\n" +
-                "//    @PositiveOrZero // 양수와 0만 허용\n" +
-                "//    @Size(min=, max=) : 문자열 또는 배열이 지정된 값 사이일 경우 통과 가능\n" +
+
                 "}\n");
 
         String code = jta.getText();
