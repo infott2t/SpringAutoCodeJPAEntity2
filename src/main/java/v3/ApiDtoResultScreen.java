@@ -21,6 +21,8 @@ public class ApiDtoResultScreen extends JFrame{
     public String variablePrint; // private Long id; ... private String str1; ...
     public String constPrint; // Long id, String str, ...
     public String constInPrint; // this.id = id, this.str1 = str1, ...
+
+    public String builderPrint;
     ApiDtoResultScreen(UtilStrConvV3 usc){
 
         //변수 초기화.
@@ -31,6 +33,7 @@ public class ApiDtoResultScreen extends JFrame{
         variablePrint = usc.getVariablesPrint(colStr, colLong, colDate);
         constPrint = usc.getConstPrint(colStr,colLong,colDate);
         constInPrint = usc.getConstInPrint(colStr,colLong,colDate);
+        builderPrint = usc.getBuilderPrint(colStr,colLong,colDate);
         jp= new JPanel();
         jl = new JLabel("@Data: " + className+"ApiDto");
         jta = new JTextArea(15,50);
@@ -58,6 +61,7 @@ public class ApiDtoResultScreen extends JFrame{
                 "    public "+className+"ApiDto("+constPrint+") {\n" +
                 ""+constInPrint+"\n"+
                 "    }\n" +
+                "/*Builder,   "+builderPrint+"*/"+
                 "}");
 
         String code = jta.getText();

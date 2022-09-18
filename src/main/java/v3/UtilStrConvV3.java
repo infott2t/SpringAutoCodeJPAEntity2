@@ -355,6 +355,38 @@ public class   UtilStrConvV3 {
         return colLongs + colStrs + colDates;
     }
 
+    public static String getBuilderPrint(String[] colStr, String[] colLong, String[] colDate) {
+
+        String str = colStr[0];
+
+        Character a = colStr[0].charAt(0);
+
+        if(Character.isUpperCase(a)) {
+            colStr = firstLowerCase(colStr);
+            colLong = firstLowerCase(colLong);
+            colDate = firstLowerCase(colDate);
+        }
+        String colLongs = "";
+        for(int i =0; i< colLong.length; i++){
+            colLongs = colLongs + " "+colLong[i]+"().\n";
+        }
+        colLongs = colLongs + "\n";
+
+        String colStrs = "";
+        for(int i =0; i< colStr.length; i++){
+            colStrs = colStrs + " "+colStr[i]+"().\n";
+        }
+        colStrs = colStrs + "\n";
+
+        String colDates = "";
+        for(int i =0; i< colDate.length; i++){
+            colDates = colDates + " "+colDate[i]+"().\n";
+        }
+        colDates = colDates + "\n";
+
+        return colLongs + colStrs + colDates;
+    }
+
     public String getNewsqlPrint(String[] colLong, String[] colStr, String[] colDate, String className, String classNameSm) {
 
         colStr = firstLowerCase(colStr);
