@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 
-public class ExtractVResultScreen extends JFrame{
+public class UpperCaseSQLResultScreen extends JFrame{
 
     private JPanel jp;
     private JLabel jl,jl2,jl3,jl4,jl5,jl6,jl7,jl8,jl9;
@@ -16,7 +16,7 @@ public class ExtractVResultScreen extends JFrame{
 
     public String className; //Alliance
 
-    ExtractVResultScreen(UtilStrConvV4 usc){
+    UpperCaseSQLResultScreen(UtilStrConvV4 usc){
         className = usc.getTableName();
         jp= new JPanel();
         jl = new JLabel("Extract...  "+ className);
@@ -25,7 +25,7 @@ public class ExtractVResultScreen extends JFrame{
         //btn = new JButton("");
         jp.add(jl);
         jp.add(jsp);
-       // jp.add(btn);
+        // jp.add(btn);
         add(jp);
         setVisible(true);
         setResizable(true);
@@ -44,7 +44,7 @@ public class ExtractVResultScreen extends JFrame{
         String code = jta.getText();
 
         try {
-            File file = new File("C:\\category\\" + className + "_extract.txt");
+            File file = new File("C:\\category\\" + className + "_sql_extract.txt");
             if (!file.exists()) {
                 file.createNewFile();
             }

@@ -1,15 +1,9 @@
 package v4;
 
-import v3.HashMapInputScreen;
-import v3.SetMethodResultScreen;
-import v3.UtilStrConvV3;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.StringReader;
 
 public class Sys04 extends JFrame{
 
@@ -76,9 +70,10 @@ public class Sys04 extends JFrame{
                 columnLongs  = jta.getText();
                 columnDates = jta.getText();
 
-                 usc = new UtilStrConvV4(tableName,valBefore);
-
-                 new ExtractVResultScreen(usc);
+                 usc = new UtilStrConvV4(tableName,valBefore, "sqlUpper");
+                 new UpperCaseSQLResultScreen(usc);
+                 //usc = new UtilStrConvV4(tableName,valBefore, "Camel");
+                //new ExtractVResultScreen(usc);
 
             }
         });
