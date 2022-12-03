@@ -39,6 +39,7 @@ public class Sys03 extends JFrame{
         jl3 = new JLabel("Entity class를 추출합니다. 적어주세요. Copy & Paste.");
         jta = new JTextArea(5,20);
         jsp = new JScrollPane(jta);
+        jtf2 = new JTextField(32);
         jsp.setPreferredSize(new Dimension(300,200));
 
 
@@ -54,12 +55,14 @@ public class Sys03 extends JFrame{
 
 
         jp.add(btn);
+        jp.add(jtf2);
+        jtf2.setText("만든 곳, https://github.com/infott2t/SpringAutoCodeJPAEntity2");
 
         setVisible(true);
         setResizable(true);
         add(jp);
         setBounds(300,300,380,700);
-
+        setTitle("v3 Spring JPA + QueryDSL");
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

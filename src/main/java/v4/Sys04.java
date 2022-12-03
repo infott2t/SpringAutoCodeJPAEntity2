@@ -43,7 +43,7 @@ public class Sys04 extends JFrame{
         jta = new JTextArea(5,20);
         jsp = new JScrollPane(jta);
         jsp.setPreferredSize(new Dimension(300,200));
-
+        jtf2 = new JTextField(33);
 
 
 
@@ -57,12 +57,13 @@ public class Sys04 extends JFrame{
 
 
         jp.add(btn);
-
+        jp.add(jtf2);
         setVisible(true);
         setResizable(true);
         add(jp);
-        setBounds(300,300,380,700);
-
+        setBounds(300,300,390,700);
+        setTitle("v4 Table Letter Change, Upper or Camel.");
+        jtf2.setText("만든 곳, https://github.com/infott2t/SpringAutoCodeJPAEntity2");
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
