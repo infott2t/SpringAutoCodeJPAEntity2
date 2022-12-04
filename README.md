@@ -1,5 +1,8 @@
 # SpringAutoCodeJPAEntity2
 
+<h3>스마트 기기. 안전하게 사용합시다. 좋은 습관을 만들어요.</h3>
+<h3>Let's safely use smartphones, etc. Let's make good traditioning toself. Thank you.</h3>
+
 Spring Boot JPA와 QueryDSL을 사용해서 코드를 자동으로 만들어 줌니다.
 
 회사에서 만들었었군요. (주)웹비즈크리에이티브, <a href="http://www.webbizz.co.kr/">http://www.webbizz.co.kr/</a>
